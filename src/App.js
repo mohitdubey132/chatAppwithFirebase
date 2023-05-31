@@ -16,7 +16,7 @@ function App() {
   useEffect(() => {
     const subsciription = onAuthStateChanged(auth, (data) => {
       setUser(data);
-    
+      console.log(data)
     });
      const unsubscirve =onSnapshot(queryForMessage, (snap) => {
       // let d =
@@ -48,6 +48,7 @@ function App() {
         text: textmessage,
         uri: user.photoURL,
         uid: user.uid,
+        sender: user.providerData[0].displayName ,
         createdAt: serverTimestamp()
       })
       setTextmessage('')
@@ -67,7 +68,10 @@ function App() {
             display:"none"
           }}}>
             { message && message.map((item) => (
-              <Message key={item.id} text={item.text} user={item.uid === user.uid ? "me" : "other"} url={item.uri}  />
+              <Message key={item.id} text={item.text} 
+              user={item.uid === user.uid ? "me" : "other"} 
+              url={item.uri} 
+              name={item.sender || 'unknown'} />
             ))}
           </VStack>
           <form onSubmit={submitHandler}>
