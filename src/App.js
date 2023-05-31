@@ -63,7 +63,9 @@ function App() {
           <Button onClick={logOutHandler} colorScheme="red" w='full' padding={4}>
             logOut
           </Button>
-          <VStack bg='whiteAlpha.300' h='full' w='full' overflowY={'auto'} >
+          <VStack bg='whiteAlpha.300' h='full' w='full' overflowY={'auto'} css={{"&::-webkit-scrollbar":{
+            display:"none"
+          }}}>
             { message && message.map((item) => (
               <Message key={item.id} text={item.text} user={item.uid === user.uid ? "me" : "other"} url={item.uri}  />
             ))}
